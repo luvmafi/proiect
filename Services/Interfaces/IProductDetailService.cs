@@ -1,11 +1,13 @@
 ﻿using proiect.Models;
 using System.Threading.Tasks;
 
-
-public interface IProductDetailService
+namespace proiect.Services.Interfaces
 {
-    Task<ProductDetail> GetByIdAsync(int productId);
-    Task CreateAsync(ProductDetail productDetail);
-    Task UpdateAsync(ProductDetail productDetail);
-    Task DeleteAsync(int productId);
+    public interface IProductDetailService
+    {
+        Task<ProductDetail> GetByIdAsync(int productId);
+        Task CreateAsync(ProductDetail productDetail);
+        Task UpdateAsync(ProductDetail productDetail);
+        Task<bool> DeleteAsync(int id);
+    }
 }

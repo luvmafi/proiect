@@ -33,15 +33,18 @@ namespace proiect.Services.Implementations
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int productId)
+        public async Task<bool> DeleteAsync(int id)
         {
-            var productDetail = await _context.ProductDetails
-                .FindAsync(productId);
-            if (productDetail != null)
+            var productDetail = await _context.ProductDetails.FindAsync(id);
+            if (productDetail == null)
             {
-                _context.ProductDetails.Remove(productDetail);
-                await _context.SaveChangesAsync();
+                return false; 
             }
+
+            _context.ProductDetails.Remove(productDetail);
+            await _context.SaveChangesAsync();
+            return true; 
         }
+
     }
 }
