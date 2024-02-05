@@ -9,15 +9,17 @@ namespace proiect.Models
         public int Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
         
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
 
         // Colecția pentru relația Many-to-Many cu Order
-        public List<OrderDetail> OrderDetails { get; set; }
+        public List<OrderDetail>? OrderDetails { get; set; }
+        public ProductDetail? ProductDetail { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

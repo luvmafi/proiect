@@ -4,15 +4,32 @@ using System.Threading.Tasks;
 using proiect.Models;
 using proiect.Services.Implementations;
 using proiect.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using proiect.Data;
 
 namespace proiect.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class DetaliiComandaController : ControllerBase
+    
+    public class DetaliiComandaController : Controller
     {
         private readonly IOrderDetailService _orderDetailService;
 
+        private readonly AppDbContext db;
+
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        private readonly RoleManager<IdentityRole> _roleManager;
+
+        public DetaliiComandaController(
+            AppDbContext context,
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager
+        )
+        {
+            db = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
+        }
         public DetaliiComandaController(IOrderDetailService orderDetailService)
         {
             _orderDetailService = orderDetailService;

@@ -10,6 +10,8 @@ namespace proiect.Services.Interfaces
         Task<Product> GetByIdAsync(int id);
         Task CreateAsync(Product product);
         Task UpdateAsync(Product product);
+
+        Task<IEnumerable<ProductWithDetailsDto>> GetProductsWithDetailsAsync();
         Task DeleteAsync(int id);
     }
 }

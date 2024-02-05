@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using proiect.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace proiect.Data
 {
@@ -24,15 +25,12 @@ namespace proiect.Data
         }
     }
 
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
         }
-
-        // public DbSet<Student> Students { get; set; }
-
         // sa nu uit sa schimb iaci
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
@@ -41,9 +39,11 @@ namespace proiect.Data
         public DbSet<Category> Categories { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<OrderDetail>()
                 .HasKey(od => new { od.OrderId, od.ProductId });
         }
-    }
 
+    }
+    
 }

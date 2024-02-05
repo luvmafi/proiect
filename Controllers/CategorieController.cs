@@ -5,14 +5,30 @@ using proiect.Models;
 using proiect.Services;
 using proiect.Services.Interfaces;
 using proiect.Services.Implementations;
+using Microsoft.AspNetCore.Identity;
+using proiect.Data;
 namespace proiect.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CategorieController : ControllerBase
+    
+    public class CategorieController : Controller
     {
         private readonly ICategoryService _categoryService;
+        private readonly AppDbContext db;
 
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        private readonly RoleManager<IdentityRole> _roleManager;
+
+        public CategorieController(
+            AppDbContext context,
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager
+        )
+        {
+            db = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
+        }
         public CategorieController(ICategoryService categoryService)
         {
             _categoryService = categoryService;

@@ -1,0 +1,8 @@
+﻿@model proiect.Models.Product
+
+<h1>Editare Produse</h1>
+<form asp-action="PutProduse">
+    <input asp-for="Id" type="hidden" />
+    <input asp-for="Name" />
+    <input type="submit" value="Salvează" />
+</form>

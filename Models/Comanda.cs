@@ -10,9 +10,10 @@ namespace proiect.Models
         public int Id { get; set; }
 
         [Required]
-        public DateTime OrderDate { get; set; }
+        public DateTime? OrderDate { get; set; }
 
         // Colecția pentru relația Many-to-Many cu Product
-        public List<OrderDetail> OrderDetails { get; set; }
+        public List<OrderDetail>? OrderDetails { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

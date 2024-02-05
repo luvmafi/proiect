@@ -50,5 +50,12 @@ namespace proiect.Services.Implementations
                 await _context.SaveChangesAsync();
             }
         }
+        public async Task<Order> GetOrderWithProductsAsync(int orderId) // many-to-many
+        {
+            return await _context.Orders
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(od => od.Product)
+                .FirstOrDefaultAsync(o => o.Id == orderId);
+        }
     }
 }

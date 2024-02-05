@@ -5,15 +5,30 @@ using System.Threading.Tasks;
 using proiect.Services.Interfaces;
 using proiect.Services.Implementations;
 using proiect.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace proiect.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ComenziController : ControllerBase
+    
+    public class ComenziController : Controller
     {
         private readonly IOrderService _orderService;
+        private readonly AppDbContext db;
 
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        private readonly RoleManager<IdentityRole> _roleManager;
+
+        public ComenziController(
+            AppDbContext context,
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager
+        )
+        {
+            db = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
+        }
         public ComenziController(IOrderService orderService)
         {
             _orderService = orderService;

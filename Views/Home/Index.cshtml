@@ -4,5 +4,11 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="links">
+        <a href="@Url.Action("Index", "Categorie")" class="btn btn-primary">Categorii</a>
+        <a href="@Url.Action("Index", "Produse")" class="btn btn-secondary">Produse</a>
+        <a href="@Url.Action("Index", "Comenzi")" class="btn btn-success">Comenzi</a>
+        <a href="@Url.Action("Index", "DetaliiComanda")" class="btn btn-danger">Detalii Comandă</a>
+        <a href="@Url.Action("Index", "DetaliiProduse")" class="btn btn-warning">Detalii Produse</a>
+    </div>
 </div>

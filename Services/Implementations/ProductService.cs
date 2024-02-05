@@ -47,5 +47,18 @@ namespace proiect.Services.Implementations
                 await _context.SaveChangesAsync();
             }
         }
+        public async Task<IEnumerable<ProductWithDetailsDto>> GetProductsWithDetailsAsync() // join
+        {
+            var productsWithDetails = await _context.Products
+                .Join(_context.ProductDetails,
+                    product => product.Id,
+                    detail => detail.ProductId,
+                    (product, detail) => new ProductWithDetailsDto { Product = product, Detail = detail })
+                .ToListAsync();
+
+            return productsWithDetails;
+        } 
+
+
     }
 }

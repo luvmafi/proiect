@@ -2,18 +2,35 @@
 using proiect.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using proiect.Models;
 using proiect.Services.Implementations; 
 using proiect.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using proiect.Data;
 
 namespace proiect.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProduseController : ControllerBase
+    
+    public class ProduseController : Controller
     {
         private readonly IProductService _productService;
 
+        private readonly AppDbContext db;
+
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        private readonly RoleManager<IdentityRole> _roleManager;
+
+        public ProduseController(
+            AppDbContext context,
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager
+        )
+        {
+            db = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
+        }
         public ProduseController(IProductService productService)
         {
             _productService = productService;
@@ -74,5 +91,25 @@ namespace proiect.Controllers
             await _productService.DeleteAsync(id);
             return NoContent();
         }
+        [HttpGet("ProductsByCategory")]
+        public async Task<ActionResult> GetProductsGroupedByCategory() // groupby si select
+        {
+            var productsByCategory = (await _productService.GetAllAsync())
+                .GroupBy(p => p.CategoryId)
+                .Select(g => new { CategoryId = g.Key, Products = g.ToList() });
+
+            return Ok(productsByCategory);
+        }
+
+        [HttpGet("ProductsWithDetails")]
+
+        public async Task<ActionResult> GetProductsWithDetails()
+        {
+            var productsWithDetails = await _productService.GetProductsWithDetailsAsync();
+            return Ok(productsWithDetails);
+        }
+
+
+
     }
 }

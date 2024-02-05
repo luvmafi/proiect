@@ -1,16 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using proiect.Models;
 using System.Threading.Tasks;
-using proiect.Models;
 using proiect.Services.Implementations;
 using proiect.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using proiect.Data;
 
 namespace proiect.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class DetaliiProduseController : ControllerBase
+    
+    public class DetaliiProduseController : Controller
     {
+        private readonly AppDbContext db;
+
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        private readonly RoleManager<IdentityRole> _roleManager;
+
+        public DetaliiProduseController(
+            AppDbContext context,
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager
+        )
+        {
+            db = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
+        }
         private readonly IProductDetailService _productDetailService;
 
         public DetaliiProduseController(IProductDetailService productDetailService)

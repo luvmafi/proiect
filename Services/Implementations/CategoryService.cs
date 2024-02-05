@@ -43,12 +43,19 @@ namespace proiect.Services.Implementations
             var category = await _context.Categories.FindAsync(id);
             if (category == null)
             {
-                return false; // Întoarce false dacă categoria nu a fost găsită
+                return false; 
             }
 
             _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
-            return true; // Întoarce true după ștergerea cu succes a categoriei
+            return true; 
+        }
+
+        public async Task<IEnumerable<Category>> GetCategoriesWithProductsAsync() // one-to-many
+        {
+            return await _context.Categories
+                .Include(c => c.Products)
+                .ToListAsync();
         }
 
     }

@@ -1,0 +1,7 @@
+﻿@model proiect.Models.Product
+
+<h1>Ești sigur că vrei să ștergi categoria @Model.Name?</h1>
+<form asp-action="DeleteProduct">
+    <input asp-for="Id" type="hidden" />
+    <input type="submit" value="Șterge" />
+</form>

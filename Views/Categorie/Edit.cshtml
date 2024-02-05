@@ -1,0 +1,8 @@
+﻿@model proiect.Models.Category
+
+<h1>Editare Categorie</h1>
+<form asp-action="PutCategory">
+    <input asp-for="Id" type="hidden" />
+    <input asp-for="Name" />
+    <input type="submit" value="Salvează" />
+</form>
