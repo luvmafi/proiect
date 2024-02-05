@@ -64,7 +64,7 @@ namespace proiect.Models
                     }
                 );
 
-                context.SaveChanges();
+               // context.SaveChanges();
             }
         }
     }
